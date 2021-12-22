@@ -1,0 +1,93 @@
+<div style="width: 90%; margin: 0 auto; padding: 1em;">
+  <mat-card>
+    <mat-card-header>
+      <mat-card-title>
+        Opciones
+      </mat-card-title>
+    </mat-card-header>
+    <mat-card-content>
+      <div>
+        <h3>Ingrese por favor el nombre de las columnas que desea extraer de documento</h3>
+        <mat-form-field class="example-form-field" appearance="fill">
+          <mat-label>Ingrese el nombre</mat-label>
+          <input matInput type="text" [formControl]="propertiesControl">
+        </mat-form-field>
+        <button (click)="addToColumns()">Agregar columna</button>
+
+        <table mat-table [dataSource]="columns" class="mat-elevation-z8">
+          <ng-container matColumnDef="columnName">
+            <th mat-header-cell *matHeaderCellDef> columnas seleccionadas </th>
+            <td mat-cell *matCellDef="let element"> {{element.columnName}} </td>
+          </ng-container>
+          <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+          <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+        </table>
+      </div>
+
+      <form [formGroup]="form">
+        <mat-form-field style="width: 90%; margin: 0 0 2em 0;">
+          <mat-label>Delimitador de columna</mat-label>
+          <input type="text" matInput formControlName="columnDelimiter">
+        </mat-form-field>
+
+        <mat-form-field style="width: 90%; margin: 0 0 2em 0;">
+          <mat-label>Delimitador de fila</mat-label>
+          <input type="text" matInput formControlName="rowDelimiter">
+        </mat-form-field>
+
+        <mat-form-field>
+          <mat-label>Columnas que componen el nombre</mat-label>
+          <mat-select multiple formControlName="nameComposition">
+            <mat-option *ngFor="let column of columns" [value]="column.columnName">
+              {{ column.columnName }}
+            </mat-option>
+          </mat-select>
+        </mat-form-field>
+
+        <mat-form-field>
+          <mat-label>Columnas que componen los apellidos</mat-label>
+          <mat-select multiple formControlName="lastNameComposition">
+            <mat-option *ngFor="let column of columns" [value]="column.columnName">
+              {{ column.columnName }}
+            </mat-option>
+          </mat-select>
+        </mat-form-field>
+
+        <mat-form-field style="width: 90%; margin: 0 0 2em 0;">
+          <mat-label>Delimitador de teléfonos (opcional)</mat-label>
+          <input type="text" matInput formControlName="phoneDelimiter">
+        </mat-form-field>
+
+        <mat-form-field>
+          <mat-label>Columnas que componen los teléfonos</mat-label>
+          <mat-select multiple formControlName="phoneNumbers">
+            <mat-option *ngFor="let column of columns" [value]="column.columnName">
+              {{ column.columnName }}
+            </mat-option>
+          </mat-select>
+        </mat-form-field>
+
+        <mat-form-field style="width: 90%; margin: 0 0 2em 0;">
+          <mat-label>Delimitador de direcciones (opcional)</mat-label>
+          <input type="text" matInput formControlName="addressDelimiter">
+        </mat-form-field>
+
+        <mat-form-field>
+          <mat-label>Columnas que componen las direcciones</mat-label>
+          <mat-select multiple formControlName="addresses">
+            <mat-option *ngFor="let column of columns" [value]="column.columnName">
+              {{ column.columnName }}
+            </mat-option>
+          </mat-select>
+        </mat-form-field>
+      </form>
+      <input (change)="onFileSelected(fileInput.files)" #fileInput type="file" id="file">
+
+      <button mat-raised-button [disabled]="form.invalid || !file" color="primary" (click)="submit()">
+        Continuar
+        <mat-icon>save</mat-icon>
+    </button>
+
+    </mat-card-content>
+  </mat-card>
+</div>
