@@ -12,19 +12,23 @@ import {MatInputModule} from '@angular/material/input';
 import {MatIconModule} from '@angular/material/icon';
 import {MatTableModule} from '@angular/material/table';
 import {MatSelectModule} from '@angular/material/select';
+import {MatPaginatorModule} from '@angular/material/paginator';
+import { ClientsTableComponent } from './components/clients-table/clients-table.component';
 
 const MaterialModules = [
   MatCardModule,
   MatInputModule,
   MatIconModule,
   MatTableModule,
-  MatSelectModule
+  MatSelectModule,
+  MatPaginatorModule
 ]
 
 @NgModule({
   declarations: [
     AppComponent,
-    StandardizerComponent
+    StandardizerComponent,
+    ClientsTableComponent
   ],
   imports: [
     BrowserModule,

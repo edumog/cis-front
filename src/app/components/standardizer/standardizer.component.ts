@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
+import { Client } from 'src/app/models/client.model';
 import { StandardizationModel } from 'src/app/models/standardization.model';
 import { HttpService } from 'src/app/services/http.service';
 
@@ -15,6 +16,7 @@ export class StandardizerComponent implements OnInit {
   public columns: { columnName: string }[] = [];
   public displayedColumns: string[] = ['columnName'];
   public file: any;
+  public clients: Client[] = [];
 
   constructor(private httpService: HttpService) { }
 
@@ -48,8 +50,9 @@ export class StandardizerComponent implements OnInit {
     if(this.form.valid || this.file) {
       let parameters: StandardizationModel = { ...this.form.value, file: this.file }
       this.httpService.standardizationClients(parameters)
-      .subscribe(response => {
-        console.log('Respuesta del servicio: ', response);
+      .subscribe((response: any) => {
+        this.clients = response
+        console.log('Clientes: ', this.clients);
       });
     }
   }
