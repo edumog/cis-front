@@ -1,4 +1,5 @@
 <div>
+  {{ clients | json }}
   <table mat-table #table [dataSource]="clients">
     <ng-container matColumnDef="name">
       <th mat-header-cell *matHeaderCellDef> Nombres </th>
