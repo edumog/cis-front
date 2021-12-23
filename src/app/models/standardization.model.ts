@@ -4,9 +4,9 @@ export interface StandardizationModel {
       rowDelimiter:  string,
       nameComposition:  string[],
       lastNameComposition:  string[],
+      phoneNumbers:  string[],
       phoneDelimiter?: string,
-      PhoneNumbers:  string[],
-      addressDelimiter?: string,
       addresses :  string[],
-      //file: any
+      addressDelimiter?: string,
+      file: File
 }

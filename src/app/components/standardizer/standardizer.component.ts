@@ -21,14 +21,14 @@ export class StandardizerComponent implements OnInit {
   ngOnInit(): void {
     this.propertiesControl.setValidators(Validators.required)
     this.form = new FormGroup({
-      columnDelimiter: new FormControl('', Validators.required),
-      rowDelimiter: new FormControl('', Validators.required),
-      nameComposition: new FormControl('', Validators.required),
-      lastNameComposition: new FormControl('', Validators.required),
+      columnDelimiter: new FormControl(''),
+      rowDelimiter: new FormControl(''),
+      nameComposition: new FormControl(''),
+      lastNameComposition: new FormControl(''),
       phoneDelimiter: new FormControl(''),
-      phoneNumbers: new FormControl('', Validators.required),
+      phoneNumbers: new FormControl(''),
       addressDelimiter: new FormControl(''),
-      addresses: new FormControl('', Validators.required),
+      addresses: new FormControl(''),
     })
   }
 
@@ -47,12 +47,10 @@ export class StandardizerComponent implements OnInit {
 
   public submit() {
     if(this.form.valid || this.file) {
-      let parameters: StandardizationModel = {
-        ...this.form.value,
-        file: this.file
-      }
+      let parameters: StandardizationModel = { ...this.form.value, file: this.file }
       console.log('Parametros que seran enviados: ',parameters)
-      this.httpService.standardizationClients(parameters).subscribe(response => {
+      this.httpService.standardizationClients(parameters)
+      .subscribe(response => {
         console.log('Respuesta del servicio: ', response);
       });
     }
