@@ -37,7 +37,6 @@ export class StandardizerComponent implements OnInit {
       let column: { columnName: string } = { columnName: this.propertiesControl.value }
       this.columns.push(column);
       this.propertiesControl.reset();
-      console.log('Colulmnas: ', this.columns);
     }
   }
 
@@ -48,7 +47,6 @@ export class StandardizerComponent implements OnInit {
   public submit() {
     if(this.form.valid || this.file) {
       let parameters: StandardizationModel = { ...this.form.value, file: this.file }
-      console.log('Parametros que seran enviados: ',parameters)
       this.httpService.standardizationClients(parameters)
       .subscribe(response => {
         console.log('Respuesta del servicio: ', response);
